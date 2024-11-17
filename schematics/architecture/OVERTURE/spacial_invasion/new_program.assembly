@@ -1,0 +1,21 @@
+# go to the frontier
+5
+cp|out
+1
+cp|out
+
+# wait for the rat
+label normal_loop
+3
+cp|out
+label rat_loop
+normal_loop # add the addr to reg0
+cp|in|3 # copy input to reg3
+is_zero # if input is 0, goto nloop
+
+# if not 0: rat
+5 # shoot code as immediate number
+cp|out # shoot!
+cp|2*8|3 # let reg3 = 0
+rat_loop
+is_zero # goto rloop

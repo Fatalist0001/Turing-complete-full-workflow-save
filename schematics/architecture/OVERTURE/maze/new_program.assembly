@@ -1,0 +1,43 @@
+# forward a step
+# turn left
+# if left is wall: 
+# 	turn right till not wall
+# goto 1
+
+const LEFT 0
+const FORWARD 1
+const RIGHT 2
+const PASS 3
+const INTERACT 4
+
+const WALL 1
+
+# code:
+# output(FORWARD);
+# output(LEFT);
+# int front = input();
+# while (front == WALL)
+# 	output(RIGHT);
+# goto start;
+
+# asm:
+label start
+FORWARD
+cp|out
+LEFT
+cp|out
+label read_input
+cp|in|3
+start
+is_zero
+RIGHT
+cp|out
+INTERACT
+cp|out
+read_input
+jmp
+
+
+
+
+

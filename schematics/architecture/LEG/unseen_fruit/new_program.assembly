@@ -1,0 +1,52 @@
+label main
+ call func_goto_belt 0 0
+ # read input
+ label main_loop
+ addi 0 io s0
+ eq|j s0 92 pass_sw
+ addi 0 s0 a0
+ call func_check_if_same 0 0
+ eq|j v0 1 func_press_btn
+ sw gp s0 nop
+ addi 1 gp gp
+ label pass_sw
+ addij 0 3 io
+ goto 0 0 main_loop
+ 
+
+label func_goto_belt
+ addij 0 0 io
+ addij 0 1 io
+ addij 0 0 io
+ addij  0 4 t0
+ label fgb_loop
+ addij 0 1 io
+ subj t0 1 t0
+ neq|j t0 0 fgb_loop
+ addij 0 0 io
+ addij 0 1 io
+ addij 0 2 io
+ addij 0 1 io
+ ret 0 0 0
+
+
+
+label func_check_if_same
+ # a0: input thing
+ addi 0 gp t0
+ label fcis_loop
+ lw t0 nop t1
+ eq a0 t1 fcis_has_item
+ subj t0 1 t0
+ neq|j t0 0xff fcis_loop
+ addij 0 0 v0
+ ret 0 0 0
+ label fcis_has_item
+ addij 0 1 v0
+ ret 0 0 0
+
+label func_press_btn
+ addij 0 2 io
+ addij 0 4 io
+ ret 0 0 0
+ 

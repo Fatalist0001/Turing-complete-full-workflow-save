@@ -1,0 +1,39 @@
+# read s0, s1 (s0/s1)
+# let i = 1
+# i*s1 >= s0 ?
+# true: {
+#	i*s1 > s0 ?
+#   true:
+#	 q = i - 1
+#   false:
+#    q = i
+#}
+# r = s0 - q*s1
+# false: i++
+
+# asm:
+addi 0 io s0
+addi 0 io s1
+
+addij 0 1 t0
+
+label loop
+mul_l t0 s1 t1
+mul_h t0 s1 t2
+
+gt t1 s0 break
+neq|j t2 0 break
+eq t1 s0 equ_break
+
+addi 1 t0 t0
+goto nop nop loop
+
+label break
+sub|j t0 1 t0
+label equ_break
+mul_l t0 s1 t1
+sub s0 t1 t1
+
+addi 0 t0 io
+addi 0 t1 io
+

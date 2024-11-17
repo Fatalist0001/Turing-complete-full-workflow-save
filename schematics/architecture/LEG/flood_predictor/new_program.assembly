@@ -1,0 +1,54 @@
+# read input
+sw gp io nop
+addi 1 gp gp
+neq|j gp 16 0
+
+label main
+ # find global max = s0
+ lw t0 nop t1
+ lt t1 s0 fgm_non_swap
+ addi 0 t1 s0
+ label fgm_non_swap
+ addi 1 t0 t0
+ lt|j t0 16 main
+ label count_loop
+ addi 0 s0 a0
+ call func_sing_layer_counter 0 0
+ subj s0 1 s0
+ neq|j s0 0 count_loop
+ addi 0 v0 io
+
+label func_sing_layer_counter
+# @a0, layer index (starts from 1)
+# @v0, water_block_counts
+ # find boundaries
+ # t1=left boundary, t2=right...
+ # addij 0 0 v0
+ addij 0 255 t1
+ label fslc_left_bound
+ addi 1 t1 t1
+ lw t1 nop t0
+ lt t0 a0 fslc_left_bound
+ addij 0 16 t2
+ label fslc_right_bound
+ subj t2 1 t2
+ lw t2 nop t0
+ lt t0 a0 fslc_right_bound
+ label fslc_counter_loop
+ lw t1 nop t0
+ geq t0 a0 fslc_non_incres
+ addi 1 v0 v0
+ label fslc_non_incres
+ addi 1 t1 t1
+ leq t1 t2 fslc_counter_loop
+ ret nop nop nop
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 

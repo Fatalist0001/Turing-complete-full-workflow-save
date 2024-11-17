@@ -1,0 +1,18 @@
+addij 32 0 t0
+
+label l_in
+addi 0 io t1 # read to t1
+sw gp t1 0
+addi 1 gp gp
+subj t0 1 t0
+gt t0 0 l_in # goto main if $t0>0
+
+addij 0 0 gp
+addij 32 0 t0
+
+label l_out
+lw gp 0 t1
+addi 0 t1 io # read to out
+addi 1 gp gp
+subj t0 1 t0
+gt t0 0 l_out # goto main if $t0>0

@@ -1,0 +1,16 @@
+# asm:
+label main
+
+addi 0 io t0
+
+eq|j t0 0 l_pop
+
+push t0 nop nop
+
+goto nop nop main
+
+label l_pop
+
+pop nop nop t0
+
+addi 0 t0 io

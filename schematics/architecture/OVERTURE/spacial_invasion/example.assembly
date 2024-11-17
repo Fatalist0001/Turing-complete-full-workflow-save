@@ -1,0 +1,36 @@
+const left 0
+const move 1
+const right 2
+const stay 3
+const shoot 5
+const act 134
+const rats 197
+const nothing 193
+const check 179
+const always 196
+
+right
+act
+move
+act
+act
+left
+act
+move
+act
+act
+act
+act
+act
+label detect
+check
+laser rats
+wait nothing
+label laser
+shoot
+act
+detect always
+label wait
+stay
+act
+detect always

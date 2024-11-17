@@ -1,0 +1,9 @@
+3
+cp|1
+# wait as nop
+cp|8|1
+cp|8|1
+cp|8|1
+cp|8|1
+0
+is_zero

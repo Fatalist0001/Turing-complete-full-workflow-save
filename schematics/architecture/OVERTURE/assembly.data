@@ -1,0 +1,13 @@
+jmp 196
+is_zero 193
+in 48
+and 67
+add 68
+is_gt 199
+out 6
+is_lt 194
+sub 69
+cp 128
+io 6
+or 64
+nand 65

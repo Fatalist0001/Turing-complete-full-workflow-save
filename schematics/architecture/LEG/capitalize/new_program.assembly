@@ -1,0 +1,15 @@
+# Cap the first:
+addi 0 io t0
+subj t0 0x20 io
+
+label main_loop
+addi 0 io t0
+eq|j t0 0x20 space_handle
+addi 0 t0 io
+goto nop nop main_loop
+
+label space_handle
+addi 0 t0 io
+addi 0 io t0
+subj t0 0x20 io
+goto nop nop main_loop

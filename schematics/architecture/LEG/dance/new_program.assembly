@@ -1,0 +1,15 @@
+const seed 4 # $t0
+const temp1 5 # $t1
+const temp2 8 # $t2
+
+addi 0 io seed
+
+label loop
+  shr|j seed 1 temp1
+  xor seed temp1 temp1
+  shl|j temp1 1 temp2
+  xor temp1 temp2 temp2
+  shr|j temp2 2 seed
+  xor temp2 seed seed
+  mod|j seed 4 io
+goto nop nop loop

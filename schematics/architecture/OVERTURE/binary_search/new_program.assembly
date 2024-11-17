@@ -1,0 +1,27 @@
+# int guess = 63;
+# output(guess);
+# int fdbk = input();
+# if (fdbk)
+#	guess--;
+# else
+#	guess++;
+# asm:
+# guess a number
+63
+cp|1 # cp guess to reg1
+1
+cp|2
+label lt_ans
+add
+label gt_ans
+# output reg3
+cp|3*8|out
+cp|3*8|1
+# read input feedback
+cp|in|3
+# is zero?
+lt_ans
+is_zero
+sub
+gt_ans
+jmp

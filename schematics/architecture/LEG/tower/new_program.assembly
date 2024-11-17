@@ -1,0 +1,62 @@
+const disk_nr s0
+const source s1
+const dest s2
+const spare s3
+
+const action 5 # swt the magnet
+
+addi 0 io disk_nr
+addi 0 io source
+addi 0 io dest
+addi 0 io spare
+call func_move nop nop
+
+label func_move
+# @disk_nr, source, dest, spare
+# store parameters before calling
+ # if disk_nr == 0: goto fm_direct
+ eq|j disk_nr 0 fm_direct
+ # else:
+  # call move 01
+  push disk_nr nop nop
+  push source nop nop
+  push dest nop nop
+  push spare nop nop
+  subj disk_nr 1 disk_nr
+  addi 0 dest t0
+  addi 0 spare dest
+  addi 0 t0 spare
+  call func_move nop nop
+  pop nop nop spare
+  pop nop nop dest
+  pop nop nop source
+  pop nop nop disk_nr
+  # move disk from source to dest
+  addi 0 source io
+  addij 0 action io
+  addi 0 dest io
+  addij 0 action io
+  # call move 02
+  push disk_nr nop nop
+  push source nop nop
+  push dest nop nop
+  push spare nop nop
+  subj disk_nr 1 disk_nr
+  addi 0 spare t0
+  addi 0 source spare
+  addi 0 t0 source
+  call func_move nop nop
+  pop nop nop spare
+  pop nop nop dest
+  pop nop nop source
+  pop nop nop disk_nr
+  ret nop nop nop
+ label fm_direct
+ # move disk from source to dest
+ addi 0 source io
+ addij 0 action io
+ addi 0 dest io
+ addij 0 action io
+ ret nop nop nop
+
+

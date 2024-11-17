@@ -1,0 +1,18 @@
+# read radius to reg1
+cp|io*8|1
+# copy radius to reg2
+cp|1*8|2
+# add
+add
+# result is 2r
+# copy reg3 to reg1, reg2
+cp|3*8|1
+cp|3*8|2
+add
+# result is 4r
+# finally, 6r = 4r + 2r
+# copy reg3 to reg1
+cp|3*8|1
+add
+# now reg3 = 6r
+cp|3*8|io

@@ -1,0 +1,51 @@
+# 0r, 1d, 2l, 3u
+const route1 0b00010011 # 3-0-1-0
+const route2 0b11101100
+const route3 0b10101100 # 0-3-2-2
+const route4 0b11111001
+const route5 0b01010011
+const route6 0b00000110
+
+# order_list1 1-2-3-4
+# order_list2 2-1-5-6
+
+label main
+ addij 0 route1 a0
+ call load_map 0 0
+ addij 0 route2 a0
+ call load_map 0 0
+ addij 0 route3 a0
+ call load_map 0 0
+ addij 0 route4 a0
+ call load_map 0 0
+ addij 0 route2 a0
+ call load_map 0 0
+ addij 0 route1 a0
+ call load_map 0 0
+ addij 0 route5 a0
+ call load_map 0 0
+ addij 0 route6 a0
+ call load_map 0 0
+ label o_loop
+ subj gp 1 gp
+ lw gp 0 io
+ goto 0 0 o_loop
+ 
+label load_map
+ # @a0: map
+ addij 0 4 t1 # t1=4
+ addij 0 0b00000011 t2
+ label lm_sub
+ and a0 t2 t3 # t3 = a0&t2
+ addi 0 t3 io # output t3
+ mod|j t3 2 t4
+ eq|j t4 0 lm_non_rev
+ addj t3 2 t3
+ and t3 t2 t3
+ label lm_non_rev
+ sw gp t3 0
+ addi 1 gp gp
+ subj t1 1 t1 # t1--
+ shr|j a0 2 a0 # a0>>2
+ gt|j t1 0 lm_sub
+ ret 0 0 0

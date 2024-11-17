@@ -1,0 +1,12 @@
+# Print Console
+label print
+sw|j gp 0x48
+addj gp 1 gp
+sw|j gp 0x45
+addj gp 1 gp
+sw|j gp 0x4C
+addj gp 1 gp
+sw|j gp 0x4C
+addj gp 1 gp
+sw|j gp 0x4F
+

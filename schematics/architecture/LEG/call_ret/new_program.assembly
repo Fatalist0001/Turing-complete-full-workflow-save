@@ -1,0 +1,52 @@
+# int fib(int n) {
+#    if(n == 1 || n == 2) {
+#        return 1;
+#    }
+#   return fib(n - 1) + fib(n - 2);
+#}
+
+label main
+ addij 0 7 a0
+ call f_fib nop nop
+ addi 0 v0 io
+
+
+label f_fib
+ # @a0: input index n
+ # @v0: return 
+ addi 0 a0 s0
+ leq|j s0 2 ffib_1
+ # call fib(n-1)
+ push s0 0 0
+ push s1 0 0
+ push s2 0 0
+ subj s0 1 s0
+ addi 0 s0 a0
+ call f_fib 0 0 
+ pop 0 0 s2
+ pop 0 0 s1
+ pop 0 0 s0
+ addi 0 v0 s1
+ # call fib(n-2)
+ push s0 0 0
+ push s1 0 0
+ push s2 0 0
+ subj s0 2 s0
+ addi 0 s0 a0
+ call f_fib 0 0 
+ pop 0 0 s2
+ pop 0 0 s1
+ pop 0 0 s0
+ addi 0 v0 s2
+
+ add s1 s2 v0
+ ret 0 0 0
+
+ label ffib_1
+ addij 0 1 v0
+ ret 0 0 0
+ 
+ 
+
+
+

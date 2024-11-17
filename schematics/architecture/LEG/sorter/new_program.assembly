@@ -1,0 +1,40 @@
+# read input 
+addij 0 15 t0
+label in_loop
+addi 0 io t1
+sw gp t1 nop
+addi 1 gp gp
+subj t0 1 t0
+neq|j t0 0 in_loop
+subj gp 1 gp
+call func_sort_arr 0 0
+addij 0 15 t0
+label out_loop
+lw gp nop t1
+addi 0 t1 io
+addi 1 gp gp
+subj t0 1 t0
+neq|j t0 0 out_loop
+
+
+label func_sort_arr
+ label fsa_iter_loop
+ addij 0 0 t0
+ label fsa_swap_loop
+ lw t0 nop t2
+ addi 1 t0 t0
+ lw t0 nop t3
+ lt t2 t3 fsa_non_swap
+ # swap t2 t3
+ sw t0 t2 nop
+ subj t0 1 t2
+ sw t2 t3 nop
+ label fsa_non_swap
+ neq t0 gp fsa_swap_loop
+ subj gp 1 gp
+ neq|j gp 0 fsa_iter_loop
+ ret 0 0 0 
+
+
+
+

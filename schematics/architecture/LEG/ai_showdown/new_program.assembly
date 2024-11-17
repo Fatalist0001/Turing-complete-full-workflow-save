@@ -1,0 +1,7 @@
+addij 3 0 io
+addi 0 io t0
+subj t0 5 t0
+addi 0 t0 io
+addi 0 io t0
+subj t0 1 t0
+addi 0 t0 io
